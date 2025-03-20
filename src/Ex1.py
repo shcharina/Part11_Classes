@@ -23,4 +23,3 @@ class Friends:
         return {person for connection in self.connections if name in connection for person in connection if person != name}
 
 friends_set = Friends({"a", "b"}, {"b", "c"}, {"c", "a"}, {"a", "c"})
-print(friends_set.names())

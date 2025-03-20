@@ -1,15 +1,33 @@
 import pytest
 
 from src.Ex1 import Friends
+
+friends = Friends({"a", "b"}, {"b", "c"}, {"c", "a"}, {"a", "c"})
+
 @pytest.mark.parametrize(
-    'friends_',
+    'connection, is_new_connection',
     [
-        ({"a", "b"}, {"b", "c"}, {"c", "a"}, {"a", "c"})
+        ({"a", "f"}, True),
+        ({"a", "b"}, False)
     ]
 )
-def test_add_connection(area_from, area_to, expected_title):
+def test_add(connection, is_new_connection):
     # Arrange & Act
-    title = get_area_filter_title(area_from=area_from, area_to=area_to)
+    is_new_conn = friends.add(connection=connection)
 
     # Assert
-    assert title == expected_title
+    assert is_new_conn == is_new_connection
+
+@pytest.mark.parametrize(
+    'connection, is_existing_connection',
+    [
+        ({"a", "f"}, False),
+        ({"a", "b"}, False)
+    ]
+)
+def test_remove(connection, is_existing_connection):
+    # Arrange & Act
+    is_new_conn = friends.add(connection=connection)
+
+    # Assert
+    assert is_new_conn == is_existing_connection
