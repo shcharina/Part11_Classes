@@ -1,5 +1,5 @@
 class Student:
-    def __init__(self, student_id, name, group) -> None:
+    def __init__(self, student_id: int, name: str, group: int) -> None:
         self.student_id = student_id
         self.name = name
         self.group = group
@@ -11,7 +11,7 @@ class Student:
     def __repr__(self):
         return f"{self.name}"
 
-    def add_grade(self, subject, grade) -> None:
+    def add_grade(self, subject: str, grade: int) -> None:
         if subject not in self.grades:
             self.grades[subject] = []
         self.grades[subject].append(grade)
@@ -22,7 +22,7 @@ class Student:
             return 0
         return sum(all_grades) / len(all_grades)
 
-    def subject_average_grade(self, subject) -> float:
+    def subject_average_grade(self, subject: str) -> float:
         if not subject in self.grades:
             return 0
         all_grades_for_subject = self.grades.get(subject, [])
@@ -44,7 +44,7 @@ class Group:
             return 0
         return sum(all_grades) / len(all_grades)
 
-    def subject_average_grade(self, subject) -> float:
+    def subject_average_grade(self, subject: str) -> float:
         all_grades = [student.subject_average_grade(subject) for student in self.students if subject in student.grades]
         if not all_grades:
             return 0
