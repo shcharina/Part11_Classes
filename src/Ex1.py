@@ -21,5 +21,3 @@ class Friends:
 
     def connected(self, name: str) -> set[str]:
         return {person for connection in self.connections if name in connection for person in connection if person != name}
-
-friends_set = Friends({"a", "b"}, {"b", "c"}, {"c", "a"}, {"a", "c"})

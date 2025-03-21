@@ -5,6 +5,12 @@ class Student:
         self.group = group
         self.grades = {}
 
+    def __str__(self):
+        return f"{self.name}"
+
+    def __repr__(self):
+        return f"{self.name}"
+
     def add_grade(self, subject, grade) -> None:
         if subject not in self.grades:
             self.grades[subject] = []
@@ -25,7 +31,7 @@ class Student:
         return sum(all_grades_for_subject) / len(self.grades.get(subject, []))
 
 class Group:
-    def __init__(self, group_id: int) -> None:
+    def __init__(self, group_id: str) -> None:
         self.group_id = group_id
         self.students: list[Student] = []
 
@@ -60,12 +66,13 @@ class Deanery:
     def group_average_grade(self, group: Group) -> float:
         return group.average_grade()
 
-    def group_subject_average(self, group: Group, subject: str) -> float:
+    def group_subject_average_grade(self, group: Group, subject: str) -> float:
         return group.subject_average_grade(subject)
 
     def students_for_dismissal(self, threshold: float = 2.5) -> list[Student]:
-        return [student for group in self.groups.values() for student in group.students if
+        students_for_dismissal = [student for group in self.groups.values() for student in group.students if
                 student.average_grade() < threshold]
+        return students_for_dismissal
 
     def scholarship_candidates(self, threshold : float = 4) -> list[Student]:
         return [student for group in self.groups.values() for student in group.students if
